@@ -1,0 +1,2 @@
+# scontracts
+Smart Contract Excercises
