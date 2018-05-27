@@ -1,0 +1,41 @@
+pragma solidity ^0.4.24;
+
+contract FirstContract {
+    
+    uint my_value;
+    address owner;
+    
+    constructor() payable {
+        my_value = 5;
+        owner = msg.sender;
+    }
+    
+    modifier only_owner() {
+        if (owner == msg.sender) {
+            _;
+        } else {
+            throw;
+        }
+    }
+    
+    function set_my_value(uint new_value) only_owner {
+        my_value = new_value;
+    }
+    
+    function get_my_value() constant returns(uint) {
+        return my_value;
+    }
+    
+    function get_balance() constant returns(uint) {
+        // return owner.balance;
+        return this.balance; // deprecated
+    }
+    
+    function kill() only_owner {
+        suicide(owner);
+    }
+    
+    function () payable {
+        // anonymus fall back function 
+    }
+}
