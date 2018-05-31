@@ -53,3 +53,9 @@ Or in ether:
 Stop mining:
 
 > miner.stop();
+
+Start geth with web3 enabled
+geth --datadir=/path/to/your/private_network --rpc --rpccorsdomain "*"
+
+https://gist.github.com/tomw1808/d186f85725fc5607eb4bb4a087596369
+
