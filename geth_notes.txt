@@ -54,6 +54,10 @@ Stop mining:
 
 > miner.stop();
 
+Unlock account:
+
+> personal.unlockAccount(eth.accounts[0]);
+
 Start geth with web3 enabled
 geth --datadir=/path/to/your/private_network --rpc --rpccorsdomain "*"
 
