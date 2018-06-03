@@ -1,4 +1,4 @@
-﻿pragma solidity ^0.4.18;
+pragma solidity ^0.4.18;
 
 import "github.com/ethereum/solidity/std/mortal.sol";
 
@@ -12,6 +12,8 @@ contract SimpleWallet is mortal {
     }
     
     event someoneAddedSomeoneToTheSendersList(address thePersonWhoAdded, address thePersonWhoIsAllowedNow, uint thisMuchHeCanSend);
+    event someoneSentEtherToSomebody(address sender, address receiver, uint amount);
+    event someoneIsDeletedSomebodyfromTheList(address thePersonWhoDeleted, address thePersonWhoWasDeleted);
     
     constructor() public payable {}
 
@@ -22,12 +24,15 @@ contract SimpleWallet is mortal {
     
     function removeAddressfromSendersList(address remove) public onlyowner {
         delete myAddressMapping[remove];
+        emit someoneIsDeletedSomebodyfromTheList(msg.sender, remove);
     }
 
     function sendFunds(address receiver, uint amountInWei) public {
         require(myAddressMapping[msg.sender].isAllowed);
         require(myAddressMapping[msg.sender].maxTransferAmount >= amountInWei);
         receiver.transfer(amountInWei);
+         // log event
+        emit someoneSentEtherToSomebody(msg.sender, receiver, amountInWei);
     }
 
     function () public payable {}
