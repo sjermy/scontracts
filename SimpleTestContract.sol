@@ -1,18 +1,18 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.4.18;
 contract MyContract {
     address creator;
     uint256 myNumber;
 
-    constructor() public {
+    function MyContract() public {
         creator = msg.sender;
         myNumber = 3;
     }
 
-    function getCreator() public view returns(address) {
+    function getCreator() public constant returns(address) {
         return creator;
     }
 
-    function getMyNumber() public view returns(uint256) {
+    function getMyNumber() public constant returns(uint256) {
         return myNumber;
     }
 
